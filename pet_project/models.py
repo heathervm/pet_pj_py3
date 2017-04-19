@@ -1,13 +1,21 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import datetime
 
 from django.db import models
 
 # Create your models here.
+class Brand(models.Model):
+    brand = models.CharField(max_length=300)
+    country_of_origin = models.CharField(max_length=300, default = "United States")
+    def __str__(self):
+        return (self.brand)
+
 class Grain(models.Model):
     name = models.CharField(max_length = 300)
     brand = models.CharField(max_length = 200)
     energy_level = models.CharField(max_length = 300, default = "Medium")
+    brand = models.ForeignKey(Brand, null="True")
     def __str__(self):
         return (self.name)
 
@@ -17,12 +25,12 @@ class uploadFile(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
     author = models.CharField(max_length = 300, blank=False)
     def __str__(self):
-        return (self.document)
+        return (self.description)
 
 class Plan(models.Model):
     plan = models.CharField(max_length = 30000)
     author = models.CharField(max_length=300, blank=False)
-    file = models.ForeignKey(uploadFile, blank=True)
+    file = models.ForeignKey(uploadFile, null="True")
     #add as foreignkey to farrier trainer etc
 
 class Farrier(models.Model):
@@ -69,14 +77,14 @@ class Horse(models.Model):
     #models.ForeignKey(whatever it links to)
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
     name = models.CharField(max_length= 300)
-    age = models.DateTimeField('date of birth', default='2000-10-01')
-    breed = models.ForeignKey(max_length=300, null="True", on_delete=models.CASCADE)
+    age = models.DateTimeField(auto_now_add=True, blank=True)
+    breed = models.ForeignKey(Breed, null="True", on_delete=models.CASCADE)
     #allergies = models.ForeignKey(Allergies)
     grain = models.ForeignKey(Grain, null="True") #make this a dropdown in time
     farrier = models.ForeignKey(Farrier, null="True", on_delete=models.CASCADE)
     #discipline = models.ForeignKey(Trainer.discipline, default = "None", nul="None")
 #    supplements = models.CharField(max_length = 300, default = "None") #same
-    photo = models.FileField(upload_to='Documents/horsePics')
+    photo = models.ForeignKey(uploadFile, null="True", on_delete=models.CASCADE)
     #trainer = models.ForeignKey(Trainer, on_delete=models.CASCADE, default="None")
     def __str__(self):
         return self.name

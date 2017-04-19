@@ -3,6 +3,10 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 # Register your models here.
-from .models import uploadFile, Horse
+from .models import uploadFile, Horse, Farrier, Owner, Breed, Grain
 admin.site.register(uploadFile)
 admin.site.register(Horse)
+admin.site.register(Farrier)
+admin.site.register(Owner)
+admin.site.register(Breed)
+admin.site.register(Grain)
