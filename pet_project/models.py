@@ -88,3 +88,21 @@ class Horse(models.Model):
     #trainer = models.ForeignKey(Trainer, on_delete=models.CASCADE, default="None")
     def __str__(self):
         return self.name
+
+
+class veterinaryCare(models.Model):
+    vet_actions = (
+        ('RT', 'Routine'),
+        ('NC', 'New Complaint'),
+        ('FL', 'Followup'),
+        ('PP', 'Prepurchase')
+    )
+    veterinarian = models.ForeignKey(Veterinarian, on_delete=models.CASCADE)
+    #horse = models.ForeignKey(Horse, on_delete=models.CASCADE)
+    visit_purpose = models.CharField(choices = vet_actions, max_length=1)
+    attachments = models.ForeignKey(uploadFile, on_delete=models.CASCADE, null="True")
+
+
+class Calendar(models.Model):
+    date = models.DateTimeField(auto_now_add=True, blank=False)
+    vet_care = models.ForeignKey(veterinaryCare, on_delete=models.CASCADE, null="True")

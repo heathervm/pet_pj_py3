@@ -14,15 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
+from django.conf import settings
 from django.contrib import admin
 from django.views.generic import RedirectView
+from django.conf.urls.static import static
+#from . import views
+
 urlpatterns = [
     url(r'^index/', include('pet_project.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^butts/', include('pet_project.urls'))
+    #url(r'^horsehome/$', horsehome_view, name = 'horse_home')
 ]
 
-urlpatterns += [
+#urlpatterns += [
     #url(r'^$', RedirectView.as_view(url='/index/', permanent=True)),
     #url(r'^$', RedirectView.as_view(url='/horsehome/', permanent=True))
-]
+#]
+
+if settings.DEBUG is True:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -11,7 +11,7 @@ from .models import Horse, Breed, uploadFile, Farrier, Owner
 #class horseListView(generic.ListView):
 #    model = Horse
 #    def get_queryset(self):
-#        return Horse.objects.filter(name__icontains='E')
+#        return Horse.objects.filter(owner__icontains='H')
 
 def horsehome(request):
     return HttpResponse("horse home index")
