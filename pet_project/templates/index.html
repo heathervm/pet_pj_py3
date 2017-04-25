@@ -7,10 +7,22 @@
 <body>
   {% block h1 %}Index page in folder sweet it works ok {% endblock %}
     {% for h in horse %}
-    <li>{{h}} {{h.owner}} {{h.photo.document}}>
+    <li>{{h}}
     </li>
     {% endfor %}
-{{horse}} {{owner}}
+<form action="." name="horses" method="POST" >
+        {% csrf_token %}
+       <label>
+            <div>name</div> <input type="text" name="name" id="name" value="{{name}}">
+        </label>
+    <label>
+            <div>owner</div> <input type="text" name="owner" id="name" value="{{owner}}">
+        </label>
+    <label>
+            <div>age</div> <input type="text" name="name" id="age" value="{{age}}">
+        </label>
+
+      <input type="submit" value="Submit">
   {% block sidebar %}<!-- insert default navigation text for every page -->{% endblock %}
   {% block content %}<!-- default content text (typically empty) -->{% endblock %}
 </body>

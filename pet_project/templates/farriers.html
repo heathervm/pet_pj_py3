@@ -1,0 +1,15 @@
+{% block h2 %} test form {% endblock h2 %}
+
+    {% for f in farrier %}
+    <li> {{f.name}}</li>
+    {% endfor %}
+   <form action="." name="farrier" method="POST" >
+        {% csrf_token %}
+       <label>
+            <div>name</div> <input type="text" name="name" id="name" value="{{name}}">
+        </label>
+
+      <input type="submit" value="Submit">
+
+
+     </form>

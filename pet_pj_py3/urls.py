@@ -18,12 +18,13 @@ from django.conf import settings
 from django.contrib import admin
 from django.views.generic import RedirectView
 from django.conf.urls.static import static
-#from . import views
+from pet_project import views
 
 urlpatterns = [
-    url(r'^index/', include('pet_project.urls')),
+    url(r'^index/', views.index, name='index'),
     url(r'^admin/', admin.site.urls),
-    #url(r'^horsehome/$', horsehome_view, name = 'horse_home')
+    url(r'^horsehome/$', views.horsehome, name = 'horse_home'),
+    url(r'^farriers/$', views.farriers, name='farriers')
 ]
 
 #urlpatterns += [
