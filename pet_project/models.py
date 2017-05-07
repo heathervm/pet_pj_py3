@@ -6,6 +6,8 @@ from django.db import models
 #from django.forms import Calendar
 
 # Create your models here.
+from django.core.validators import RegexValidator
+
 class Brand(models.Model):
     brand = models.CharField(max_length=300)
     country_of_origin = models.CharField(max_length=300, default = "United States")
@@ -20,34 +22,49 @@ class Grain(models.Model):
     def __str__(self):
         return (self.name)
 
+class Supplements(models.Model):
+    name = models.CharField(max_length=300)
+    brand=models.ForeignKey(Brand, on_delete=models.CASCADE)
+    ordered_on = models.DateTimeField(auto_now_add=True)
+
+class Person(models.Model):
+    name = models.CharField(max_length=300, blank=False, default="Jane Doe")
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+    phone_number = models.CharField(validators=[phone_regex], blank=True, default='8008888888', max_length=15)
+
+    address = models.CharField(max_length = 700, blank= "True")
+    email = models.EmailField(max_length=100, blank="True")
+    def __str__(self):
+        return (self.name)
+
 class uploadFile(models.Model):
     description = models.CharField(max_length=300, blank=False)
     document = models.FileField(upload_to='Documents')
     uploaded_at = models.DateTimeField(auto_now_add=True)
-    author = models.CharField(max_length = 300, blank=False)
+    author = models.ForeignKey(Person, blank=False)
     def __str__(self):
         return (self.description)
 
 class Plan(models.Model):
     plan = models.CharField(max_length = 30000)
-    author = models.CharField(max_length=300, blank=False)
+    author = models.ForeignKey(Person, blank=False)
     file = models.ForeignKey(uploadFile, null="True")
     date = models.DateTimeField(auto_now_add=True, blank=True)
 
     #add as foreignkey to farrier trainer etc
 
 class Farrier(models.Model):
-    name = models.CharField(max_length= 300)
+    name = models.CharField(max_length=300, null="False")
     email = models.EmailField(max_length= 254, null="True")
     phone_number = models.IntegerField(default=1234567890)
     #horse_name = models.ForeignKey(HorseInfo, default = "None")
     def __str__(self):
-        return self.name
+        return (self.name)
 
 class Veterinarian(models.Model):
-    name = models.CharField(max_length=300)
-    phone_number = models.IntegerField(default=1234567890)
-    email = models.EmailField(max_length= 254, null="True")
+    name = models.ForeignKey(Person, null="False")
+    #phone_number = models.IntegerField(default=1234567890)
+    #email = models.EmailField(max_length= 254, null="True")
     def __str(self):
         return self.name
 
@@ -138,6 +155,16 @@ class Calendar(models.Model):
 class farrierForm(ModelForm):
     class Meta:
         model = Farrier
-        fields = ['name']
+        fields = ['name', 'email', 'phone_number']
 
 #CalendarForm = modelform_factory(Calendar, fields=('date', 'vet_care', 'farrier_care'))
+class vetForm(ModelForm):
+    class Meta:
+        model = Veterinarian
+        fields = ['name']
+
+#class farrierCareForm(ModelForm):
+#    class Meta:
+#        fields=['farrier_actions', 'farrier', 'visit_purpose', 'notes']
+
+

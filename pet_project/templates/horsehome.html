@@ -1,1 +1,12 @@
-"horse home dot html"
+<form action="." name="aah_form" method="POST" >
+        {% csrf_token %}
+       <label>
+            <div>name</div> <input type="text" name="name" id="name" value="{{name}}">
+           <div>email</div> <input type="email" name="email" id="email" value="{{email}}">
+           <div>phone number</div><input type="tel" name="phone_number" id="phone_number" value="{{phone_number}}">
+        </label>
+
+      <input type="submit" value="Submit">
+
+
+     </form>

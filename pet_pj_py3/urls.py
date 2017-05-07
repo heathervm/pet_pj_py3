@@ -24,7 +24,8 @@ urlpatterns = [
     url(r'^index/', views.index, name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^horsehome/$', views.horsehome, name = 'horse_home'),
-    url(r'^farriers/$', views.farriers, name='farriers')
+    url(r'^farriers/$', views.farriers, name='farriers'),
+    url(r'^veterinarians/$', views.veterinarians, name='veterinarians')
 ]
 
 #urlpatterns += [

@@ -1,12 +1,13 @@
-{% block h2 %} test form {% endblock h2 %}
+{% block h2 %} test vets {% endblock h2 %}
 
-    {% for f in farrier %}
-    <li> {{f.name}} {{f.email}} {{f.phone_number}}</li>
+    {% for v in veterinarian %}
+    <li> {{v.all}} </li>
     {% endfor %}
-   <form action="." name="farrier" method="POST" >
+   <form action="." name="veterinarian" method="POST" >
         {% csrf_token %}
        <label>
             <div>name</div> <input type="text" name="name" id="name" value="{{name}}">
+
            <div>email</div> <input type="email" name="email" id="email" value="{{email}}">
            <div>phone number</div><input type="tel" name="phone_number" id="phone_number" value="{{phone_number}}">
         </label>
@@ -15,4 +16,3 @@
 
 
      </form>
-

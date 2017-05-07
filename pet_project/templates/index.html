@@ -6,9 +6,15 @@
 
 <body>
   {% block h1 %}Index page in folder sweet it works ok {% endblock %}
-    {% for h in horse %}
-    <li>{{h}}
-    </li>
+    {{filtered_h}}
+    {% for h in filtered_h %}
+    {{h}}
+
+
+    {% endfor %}
+    {{user.email}}
+    {% for p in poi %}
+    {{p}}
     {% endfor %}
 <form action="." name="horses" method="POST" >
         {% csrf_token %}
@@ -23,7 +29,8 @@
         </label>
 
       <input type="submit" value="Submit">
-  {% block sidebar %}<!-- insert default navigation text for every page -->{% endblock %}
+  {% block sidebar %}<!-- insert default navigation text for every page -->{{filtered_h}}{% endblock %}
   {% block content %}<!-- default content text (typically empty) -->{% endblock %}
+
 </body>
 </html>
