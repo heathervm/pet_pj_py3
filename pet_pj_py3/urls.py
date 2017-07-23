@@ -25,7 +25,10 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^horsehome/$', views.horsehome, name = 'horse_home'),
     url(r'^farriers/$', views.farriers, name='farriers'),
-    url(r'^veterinarians/$', views.veterinarians, name='veterinarians')
+    url(r'^veterinarians/$', views.veterinarians, name='veterinarians'),
+    url(r'^(?P<person_id>[0-9]+)/info/$', views.person, name='person'),
+    url(r'^every_person/$', views.every_person, name='every_person'),
+    url(r'^(?P<name>w+)/info$', views.horsename, name = 'horsename'),
 ]
 
 #urlpatterns += [

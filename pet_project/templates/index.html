@@ -8,14 +8,25 @@
   {% block h1 %}Index page in folder sweet it works ok {% endblock %}
     {{filtered_h}}
     {% for h in filtered_h %}
-    {{h}}
+    {{h.name}}
 
 
     {% endfor %}
     {{user.email}}
     {% for p in poi %}
-    {{p}}
+    {{p.name}}
     {% endfor %}
+    {{test_cal}}
+<div id="calendar"></div>
+<script type='text/javascript'>
+$(document).ready(function() {
+    // page is now ready, initialize the calendar...
+    $('#calendar').fullCalendar({
+        // put your options and callbacks here
+      events: '/schedule/api/occurrences?calendar_slug=test4'
+    })
+});
+</script>
 <form action="." name="horses" method="POST" >
         {% csrf_token %}
        <label>

@@ -2,6 +2,7 @@
 
     {% for f in farrier %}
     <li> {{f.name}} {{f.email}} {{f.phone_number}}</li>
+    <li><a href='.  {{f.name}}.html'>{{f.name}}</a></li>
     {% endfor %}
    <form action="." name="farrier" method="POST" >
         {% csrf_token %}

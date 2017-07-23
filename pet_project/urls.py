@@ -18,6 +18,9 @@ from django.conf.urls import url
 from . import views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^$', views.horsehome, name='horsehome'),
-    url(r'^$', views.farriers, name='farriers')
+    url(r'^(?P<person>\w+)/info/$', views.person, name='person')
+    url(r'^$', views.farriers, name='farriers'),
+    url(r'^(?P<horse_name>+)/info/', views.horse_info, name='horse_info'),
+     url(r'^(?P<person>\w+)/info/$', views.person, name='person'),
+    url(r'^every_person/$', views.every_person, name='every_person'),
 ]

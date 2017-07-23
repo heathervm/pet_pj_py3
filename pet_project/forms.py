@@ -1,7 +1,7 @@
 #forms go here
 from django.forms import modelform_factory, ModelForm
 from django.db import models
-from .models import uploadFile, Horse, Farrier, Owner, Breed, Grain, Veterinarycare, Calendar
+from .models import uploadFile, Horse, Farrier, Owner, Breed, Grain, veterinaryCare, Calendar
 
 class farrierForm(ModelForm):
     class Meta:
